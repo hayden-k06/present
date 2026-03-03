@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Katie!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #722f37 0%, #4a1a22 50%, #2d0f14 100%);
+      font-family: 'Playfair Display', serif;
+      color: #e8d0d0;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #f8e8e8;
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.5rem, 6vw, 3rem);
+      color: #d4a5a5;
+      margin-bottom: 1rem;
+    }
+
+    .enter-btn {
+      display: inline-block;
+      color: #f8e8e8;
+      text-decoration: none;
+      font-size: 1.5rem;
+      padding: 15px 40px;
+      border: 2px solid rgba(248, 232, 232, 0.4);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      animation: pulse 2s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 255, 255, 0.4); }
+    }
+
+    .enter-btn:hover {
+      background: rgba(248, 232, 232, 0.1);
+      transform: scale(1.1);
+    }
+
+    .cake {
+      font-size: 6rem;
+      animation: bounce 1s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .name {
+      font-size: clamp(2rem, 8vw, 4rem);
+      color: #d4a5a5;
+      margin: 1rem 0 2rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .message {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .from {
+      font-size: 1.2rem;
+      color: #b87a82;
+      font-style: italic;
+    }
+
+    .text-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 165, 165, 0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      max-width: 600px;
+      max-height: 60vh;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .text-box p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .click-btn {
+      display: inline-block;
+      color: #d4a5a5;
+      text-decoration: none;
+      padding: 12px 30px;
+      border: 1px solid rgba(212, 165, 165, 0.4);
+      border-radius: 25px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .click-btn:hover {
+      background: rgba(212, 165, 165, 0.2);
+      color: #f8e8e8;
+    }
+
+    .final-title {
+      font-size: clamp(4rem, 20vw, 12rem);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 
+          0 0 40px rgba(255, 255, 255, 0.5),
+          0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+      to {
+        text-shadow: 
+          0 0 60px rgba(255, 200, 200, 0.7),
+          0 0 100px rgba(255, 150, 150, 0.5),
+          0 0 150px rgba(255, 100, 100, 0.3),
+          0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .decorations {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+      }
+    }
+
+    .heart {
+      position: absolute;
+      color: #722f37;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.1); }
+    }
+
+    .balloons {
+      position: fixed;
+      bottom: -100px;
+      font-size: 3rem;
+      animation: rise 8s ease-in-out infinite;
+    }
+
+    @keyframes rise {
+      to {
+        transform: translateY(-120vh);
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    .nav-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(212, 165, 165, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dots span.active {
+      background: rgba(212, 165, 165, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="decorations" id="decorations"></div>
+
+  <nav class="nav-dots" id="navDots"></nav>
+
+  <!-- Page 1: Welcome -->
+  <div class="page active" data-page="1">
+    <h1 style="font-size: clamp(2.5rem, 10vw, 5rem);">A Special Surprise</h1>
+    <p class="subtitle">For Katie</p>
+    <div class="enter-btn" onclick="nextPage()">Click to Enter 💝</div>
+  </div>
+
+  <!-- Page 2: Birthday -->
+  <div class="page" data-page="2">
+    <div class="cake">🎂</div>
+    <h1 style="font-size: clamp(3rem, 12vw, 8rem);">Happy Birthday</h1>
+    <div class="name">Katie</div>
+    <p class="message">
+      Happy birthday my super stinky, nonchalant, old, weird yet super amazing, awesome sauce, beautiful, girl!<br>
+      You said no gifts for your birthday, but since when have I ever listened to you anyways? :)
+    </p>
+    <p class="from">-Hayden ❤️</p>
+    <div class="click-btn" onclick="nextPage()">Click here</div>
+  </div>
+
+  <!-- Page 3: Part 1 -->
+  <div class="page" data-page="3">
+    <h1 style="font-size: clamp(2.5rem, 10vw, 5rem);">Part 1</h1>
+    
+    <div class="text-box">
+      <p>Hey Kate, happy birthday!!!
+
+How's it feel to officially be elderly? Do your knees crack yet? I'm kidding — you are not old by any means (yet).
+
+But seriously, I wanted to make this to show how much I appreciate you. Today I went back and read through our entire text history, and I'm not even exaggerating — it was such a chaotic masterpiece. From you somehow managing to stub 3 toes at once (still impressive), to me "putting on a scary movie for you to get scared then cuddle up to me" like a strategic mastermind… and the flirting that came with that. To our elite Roblox sessions, to me ragebaiting you with "chicken butt," to your absolutely unhinged and infamous "when I get my wisdom teeth pulled and I wake up with a bald ccooch and my dentist has a full beard" 😭
+
+Reading all of that back just made me realize how many random, funny, slightly concerning memories we already have. And honestly? I love that. I genuinely love having you in my life.
+
+Even though there's still so much for us to learn about each other, from what I've seen so far, I think you're an incredible person. You're kind, thoughtful, caring, patient, outgoing, funny, unintentionally chaotic in the best way, and just really easy to be around. You make things more fun without even trying. And yeah — I genuinely like you a lot. And at the end of the day, i'm just a random nerdy dude that just so happened to be a hopeless romantic, d1 professional yearner, and absolute weirdo who likes an amazing girl like you... so thank you.
+
+And even though you said you don't want anything for your birthday… since when do I listen anyway? Especially when it comes to someone I like. So I'm doing this for you regardless.
+
+I hope this year is huge for you — like scary big in the best way. I'm excited to see everything you accomplish… and I'm kind of hoping I get to stick around and be part of it too. 🤍</p>
+    </div>
+
+    <div class="click-btn" onclick="nextPage()">Click here</div>
+  </div>
+
+  <!-- Page 4: Part 2 -->
+  <div class="page" data-page="4">
+    <h1 style="font-size: clamp(2.5rem, 10vw, 5rem);">Part 2</h1>
+    
+    <div class="text-box">
+      <p>So in terms of your actual presents themselves, you're getting multiple things. One of them you're getting once you tell me you're done reading through all of this, the next one, I'm going to need your email for so I can send it to you... and the other one I'll just surprise you with it whenever I see fit :)</p>
+    </div>
+
+    <div class="click-btn" onclick="nextPage()">Click here</div>
+  </div>
+
+  <!-- Page 5: Final -->
+  <div class="page" data-page="5">
+    <div class="cake" style="font-size: 8rem;">🎂</div>
+    <h1 class="final-title">Happy Birthday</h1>
+    <div class="name" style="font-size: clamp(3rem, 15vw, 8rem);">Katie</div>
+    <div class="from" style="font-size: clamp(1.5rem, 5vw, 3rem);">- Hayden ❤️</div>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const totalPages = 5;
+
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= totalPages; i++) {
+      const dot = document.createElement('span');
+      dot.onclick = () => goToPage(i);
+      if (i === 1) dot.classList.add('active');
+      navDots.appendChild(dot);
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.nav-dots span').forEach((dot, index) => {
+        dot.classList.toggle('active', index + 1 === currentPage);
+      });
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages) {
+        goToPage(currentPage + 1);
+      }
+    }
+
+    function goToPage(pageNum) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelector(`[data-page="${pageNum}"]`).classList.add('active');
+      currentPage = pageNum;
+      updateDots();
+    }
+
+    const decorations = document.getElementById('decorations');
+    
+    for (let i = 0; i < 40; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.background = ['#722f37', '#d4a5a5', '#f8e8e8', '#b87a82', '#4a1a22', '#fff'][Math.floor(Math.random() * 6)];
+      confetti.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      confetti.style.animationDelay = Math.random() * 5 + 's';
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      decorations.appendChild(confetti);
+    }
+
+    for (let i = 0; i < 12; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = Math.random() * 100 + '%';
+      heart.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+      heart.style.animationDelay = Math.random() * 2 + 's';
+      decorations.appendChild(heart);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloons';
+      balloon.innerHTML = '🎈';
+      balloon.style.left = (10 + i * 12) + '%';
+      balloon.style.animationDuration = (6 + Math.random() * 4) + 's';
+      balloon.style.animationDelay = Math.random() * 5 + 's';
+      decorations.appendChild(balloon);
+    }
+
+    for (let i = 0; i < 20; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 1.5 + 's';
+      decorations.appendChild(sparkle);
+    }
+  </script>
+</body>
+</html>
